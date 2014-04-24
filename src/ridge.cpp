@@ -98,11 +98,11 @@ int Ridge::load_data(const char* data, char sep){
 void Ridge::ridge(){
 
 	if(loaded){
-		MatrixXd A = X.adjoint() * X;
+		MatrixXd A = X.transpose() * X;
 		MatrixXd R = MatrixXd::Identity(A.rows(),A.cols());
 		R *= lambda;
 		A += R;
-		B = A.inverse()*X.adjoint()*Y;
+		B = A.inverse()*X.transpose()*Y;
 	}
 }
 
