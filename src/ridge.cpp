@@ -65,9 +65,7 @@ int Ridge::load_data(const char* data, char sep){
 
 	// Mean centre Y's
 	ymean = Y.colwise().mean()(0);
-	for(unsigned int i = 0; i < Y.rows(); i++){
-		Y(i) -= ymean;
-	}
+	Y.array() -= ymean;
 
 	// Calculate X means
 	M = X.colwise().mean();
