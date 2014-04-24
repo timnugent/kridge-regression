@@ -1,0 +1,68 @@
+Ridge regression using the Eigen linear algebra library
+-------------------------------------------------------
+Tim Nugent 2014
+
+Build
+-----
+
+Install Eigen, e.g.:
+
+sudo apt-get install libeigen3-dev
+
+or download from http://eigen.tuxfamily.org/.
+
+Make sure the include path is set right in the Makefile.
+
+Compile with 'make'.
+
+Run
+---
+
+Run with 'make test', or:
+
+bin/ridge data/test.data
+
+Input file format is CSV without header, e.g.:
+
+y,x1,x2,x3,x4 ... xn
+
+Output
+------
+
+Columns are lambda, intercept, then x1, x2 ... xn:
+
+bin/ridge data/test.data 
+0.000 0.295034 0.672270 1.068785
+0.001 0.297607 0.672094 1.068295
+0.002 0.300179 0.671917 1.067806
+0.003 0.302749 0.671741 1.067318
+0.004 0.305318 0.671565 1.066830
+0.005 0.307885 0.671389 1.066342
+0.006 0.310451 0.671213 1.065854
+0.007 0.313016 0.671037 1.065367
+0.008 0.315579 0.670861 1.064880
+0.009 0.318140 0.670685 1.064394
+0.010 0.320700 0.670510 1.063908
+....
+
+Notes
+-----
+
+After loading the data, all columns are mean centred, and X's are scaled by their population standard deviations (this is the way it's done in R too).
+
+Useful stuff
+------------
+
+http://en.wikipedia.org/wiki/Tikhonov_regularization
+http://web.as.uky.edu/statistics/users/pbreheny/764-F11/notes/9-1.pdf
+http://tamino.wordpress.com/2011/02/12/ridge-Ridge/
+http://stats.stackexchange.com/questions/6734/difference-between-ridge-Ridge-implementation-in-r-and-sas
+http://r.789695.n4.nabble.com/lm-ridge-MASS-intercept-questions-td2065681.html
+http://www.stats.ox.ac.uk/pub/MASS4/VR4ex.pdf
+
+
+Bugs
+----
+
+timnugent@gmail.com
+
