@@ -33,7 +33,6 @@ private:
 int Ridge::load_data(const char* data, char sep){
 
 	// Read data
-	double ysum = 0.0;
 	unsigned int row = 0;
 	ifstream file(data);
 	if(file.is_open()){
@@ -45,7 +44,6 @@ int Ridge::load_data(const char* data, char sep){
 				if(col == 0){
 					Y.conservativeResize(row+1);
 					Y(row) = atof(token.c_str());
-					ysum += Y(row);
 				}else{
 					if(!row){
 						X.conservativeResize(row+1,col);
@@ -66,21 +64,13 @@ int Ridge::load_data(const char* data, char sep){
 	B.resize(Y.rows());
 
 	// Mean centre Y's
-	ymean = ysum/(double)Y.rows();
+	ymean = Y.colwise().mean()(0);
 	for(unsigned int i = 0; i < Y.rows(); i++){
 		Y(i) -= ymean;
 	}
 
 	// Calculate X means
-	M = ArrayXd::Zero(X.cols());
-	for(unsigned int i = 0; i < X.rows(); i++){
-		for(unsigned int j = 0; j < X.cols(); j++){
-			M(j) += X(i,j);
-		}	
-	}
-	for(unsigned int i = 0; i < M.rows(); i++){
-		M(i) /= X.rows();
-	}
+	M = X.colwise().mean();
 
 	// Calculate X's population standard deviations
 	Xscale = ArrayXd::Zero(X.cols());
