@@ -48,7 +48,7 @@ bin/ridge data/test.data
 Notes
 -----
 
-After loading the data, all columns are mean centred, and X's are scaled by their population standard deviations (this is the way it's done in R too).
+After loading the data, all columns are mean centred, and X's are scaled by their population standard deviations (this is the way it's done in R, too). Also, the matrix X'X is assumed to be non-singular (when lambda = 0.0) so the inversion may fail if this is not the case.
 
 Useful stuff
 ------------
